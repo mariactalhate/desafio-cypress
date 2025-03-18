@@ -32,3 +32,13 @@ Cypress.Commands.add('emailGenerator', () =>{
     const randomEmail = `${randomString}@gmail.com`
     return randomEmail
 })
+
+Cypress.Commands.add('makeRequest', (method, url, body, headers = {}) => {
+    cy.request({
+        method: method,
+        url: url,
+        body: body,
+        headers: headers,
+        failOnStatusCode: false
+    })
+})
