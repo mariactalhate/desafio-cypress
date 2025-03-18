@@ -23,3 +23,12 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('getByAttr', (object, attribute, value) => { 
+    cy.get(`${object}[${attribute}="${value}"]`)
+})
+
+Cypress.Commands.add('emailGenerator', () =>{
+    const randomString = Math.random().toString(36).substring(2, 15)
+    const randomEmail = `${randomString}@gmail.com`
+    return randomEmail
+})
