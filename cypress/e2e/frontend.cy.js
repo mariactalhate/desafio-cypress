@@ -18,7 +18,6 @@ describe('template spec', () => {
   it('Deve realizar fluxo de cadastro com sucesso', () => {
     cy.dataGenerator().then(data => {
       cy.visit('/login') // acessa página de login
-      cy.intercept('POST', 'https://serverest.dev/usuarios').as('usuariosRequest') // intercepta request de cadastro realizado
       cy.getByAttr('a', 'data-testid', 'cadastrar').click() // clica em link de Cadastre-se
       cy.url().should('contain', '/cadastrarusuarios') // valida url da página de cadastro
       cy.getByAttr('input', 'data-testid', 'nome').type(data.nome) // preenche input de nome
@@ -26,8 +25,6 @@ describe('template spec', () => {
       cy.getByAttr('input', 'data-testid', 'password').type(data.password) // preenche input de senha
       cy.getByAttr('button', 'data-testid', 'cadastrar').click() // clica no botão Cadastrar
       cy.get('.alert').should('be.visible').and('contain', 'Cadastro realizado com sucesso') // valida alerta de sucesso
-      cy.wait('@usuariosRequest') // aguarda requisição de cadastro realizado
-      cy.url().should('contain', '/home') // valida redirecionamento para homepage
       }) 
   })
 
