@@ -22,6 +22,8 @@
 //
 //
 // -- This will overwrite an existing command --
+
+
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 Cypress.Commands.add('getByAttr', (object, attribute, value) => { 
     cy.get(`${object}[${attribute}="${value}"]`)
@@ -29,7 +31,7 @@ Cypress.Commands.add('getByAttr', (object, attribute, value) => {
 
 Cypress.Commands.add('dataGenerator', () =>{
     const randomString = Math.random().toString(36).substring(2, 15)
-    let data = {
+    const data = {
         "nome": "Nome teste",
         "email": `${randomString}@gmail.com`,
         "password": "SenhaSuperDificil!",
@@ -47,3 +49,11 @@ Cypress.Commands.add('makeRequest', (method, url, body, headers = {}) => {
         failOnStatusCode: false
     })
 })
+
+Cypress.Commands.add('getID', () => {
+    cy.makeRequest('GET', '/usuarios').then(response =>{
+        const id = response.body.usuarios[0]._id
+        return id
+    })
+})
+
