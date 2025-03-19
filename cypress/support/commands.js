@@ -27,10 +27,15 @@ Cypress.Commands.add('getByAttr', (object, attribute, value) => {
     cy.get(`${object}[${attribute}="${value}"]`)
 })
 
-Cypress.Commands.add('emailGenerator', () =>{
+Cypress.Commands.add('dataGenerator', () =>{
     const randomString = Math.random().toString(36).substring(2, 15)
-    const randomEmail = `${randomString}@gmail.com`
-    return randomEmail
+    let data = {
+        "nome": "Nome teste",
+        "email": `${randomString}@gmail.com`,
+        "password": "SenhaSuperDificil!",
+        "administrador": "false"
+    } 
+    return data
 })
 
 Cypress.Commands.add('makeRequest', (method, url, body, headers = {}) => {
