@@ -50,10 +50,12 @@ Cypress.Commands.add('makeRequest', (method, url, body, headers = {}) => {
     })
 })
 
-Cypress.Commands.add('getID', () => {
-    cy.makeRequest('GET', '/usuarios').then(response =>{
-        const id = response.body.usuarios[0]._id
-        return id
+Cypress.Commands.add('returnUserId', () => {
+    cy.dataGenerator().then(data =>{
+        cy.makeRequest('POST', '/usuarios', data).then(response =>{
+            const id = response.body._id
+            return id
+        })
     })
 })
 

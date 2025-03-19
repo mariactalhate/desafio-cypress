@@ -36,8 +36,8 @@ describe('template spec', () => {
   })
 
   it('Deve validar deleção de usuario', () => {
-    cy.getID().then(data => { // busca ID de um usuário existente
-      cy.makeRequest('DELETE', `/usuarios/${data}`).then(response =>{ // envia requisição de deleção
+    cy.returnUserId().then(id => { // cria novo usuário e armazena ID
+      cy.makeRequest('DELETE', `/usuarios/${id}`).then(response =>{ // envia requisição de deleção
         cy.log(JSON.stringify(response.body))
         expect(response.status).to.eq(200) // valida status 200
         // valida dados de corpo da resposta
